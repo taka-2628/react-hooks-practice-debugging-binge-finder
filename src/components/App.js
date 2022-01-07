@@ -13,7 +13,12 @@ function App() {
   const [filterByRating, setFilterByRating] = useState("");
 
   useEffect(() => {
-    Adapter.getShows().then((shows) => setShows(shows));
+    fetch("http://api.tvmaze.com/shows")
+    /*Adapter.getShows()*/
+      .then(res => res.json())
+      .then((shows) => {
+        setShows(shows)
+      });
   }, []);
 
   useEffect(() => {
@@ -31,18 +36,22 @@ function App() {
   }
 
   function selectShow(show) {
-    Adapter.getShowEpisodes(show.id).then((episodes) => {
-      setSelectedShow(show);
-      setEpisodes(episodes);
-    });
+    fetch(`http://api.tvmaze.com/shows/${show.id}/episodes`)
+      .then(res => res.json())
+      .then((episodes) => {
+        setSelectedShow(show);
+        setEpisodes(episodes);
+      });
   }
 
   let displayShows = shows;
+  
   if (filterByRating) {
     displayShows = displayShows.filter((s) => {
-      s.rating.average >= filterByRating;
+      return s.rating.average == filterByRating
     });
   }
+
 
   return (
     <div>

@@ -1,6 +1,7 @@
 import React from "react";
 
 function Filter(props) {
+
   return (
     <div>
       <h4> Filter By Rating </h4>
@@ -22,3 +23,5 @@ function Filter(props) {
     </div>
   );
 }
+
+export default Filter;
