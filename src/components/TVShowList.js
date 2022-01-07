@@ -3,6 +3,7 @@ import { Grid } from "semantic-ui-react";
 import TVShow from "./TVShow"
 
 function TVShowList(props) {
+  console.log(props)
   function mapAllShows() {
     if (!!props.searchTerm) {
       props.shows.map((s) => {
